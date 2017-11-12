@@ -1,0 +1,45 @@
+{
+  "name": "data-app-boilerplate",
+  "version": "0.1.0",
+  "description": "Boilerplate for data-driven web apps using Python-Flask and React",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "NODE_ENV=dev && webpack -d --watch",
+    "build": "NODE_ENV=prod && webpack -p"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/enjeyw/data-app-boilerplate.git"
+  },
+  "keywords": [
+    "data",
+    "python",
+    "react",
+    "flask",
+    "boilerplate"
+  ],
+  "author": "Nick Williams",
+  "license": "MIT",
+  "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "babel-polyfill": "^6.26.0",
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-react": "^6.24.1",
+    "babel-preset-stage-2": "^6.24.1",
+    "webpack": "^3.8.1"
+  },
+  "dependencies": {
+    "auth0-lock": "^10.23.1",
+    "react": "^16.0.0",
+    "react-dom": "^16.0.0",
+    "react-redux": "^5.0.6",
+    "react-router": "^4.2.0",
+    "react-router-dom": "^4.2.2",
+    "react-update": "^0.4.4",
+    "redux": "^3.7.2",
+    "redux-saga": "^0.16.0",
+    "styled-components": "^2.2.3"
+  }
+}
