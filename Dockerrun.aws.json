@@ -1,0 +1,74 @@
+{
+  "AWSEBDockerrunVersion": 2,
+  "containerDefinitions": [
+    {
+      "name": "app",
+      "image": "290492953667.dkr.ecr.ap-southeast-2.amazonaws.com/sempoalpha:app",
+      "essential": true,
+      "memory": 200,
+      "cpu": 1,
+      "links": [
+        "redis:redis"
+        ],
+      "environment": [
+        {
+          "name": "CONTAINER_TYPE",
+          "value": "APP"
+        },
+        {
+          "name": "LOCATION",
+          "value": "PROD"
+        }
+      ]
+    },
+    {
+      "name": "proxy",
+      "image": "290492953667.dkr.ecr.ap-southeast-2.amazonaws.com/sempoalpha:proxy",
+      "essential": true,
+      "memory": 200,
+      "cpu": 1,
+      "portMappings": [
+        {
+          "hostPort": 80,
+          "containerPort": 80,
+          "protocol": "tcp"
+        }
+      ],
+      "links": [
+        "app:app"
+      ]
+    },
+    {
+      "name": "redis",
+      "image": "redis:alpine",
+      "essential": true,
+      "memory": 128,
+      "portMappings": [{
+          "hostPort": 6379,
+          "containerPort": 6379
+      }],
+      "mountPoints": []
+    },
+    {
+      "name": "worker",
+      "image": "290492953667.dkr.ecr.ap-southeast-2.amazonaws.com/sempoalpha:app",
+      "essential": false,
+      "memory": 128,
+      "links": [
+          "redis:redis"
+      ],
+      "mountPoints": [],
+      "environment": [
+        {
+          "name": "CONTAINER_TYPE",
+          "value": "WORKER"
+        },
+        {
+          "name": "LOCATION",
+          "value": "PROD"
+        }
+      ]
+    }
+
+  ]
+}
