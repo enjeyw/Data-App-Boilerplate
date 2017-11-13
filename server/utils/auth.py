@@ -13,7 +13,7 @@ def get_auth0_profile(auth_0_identity_token):
     headers = {'content-type': 'application/json',
                'authorization': 'Bearer ' + auth_0_identity_token}
 
-    r = requests.get('https://sempo.au.auth0.com/userinfo', headers = headers)
+    r = requests.get(app.config['AUTH0_DOMAIN'], headers = headers)
 
     try:
         profile = r.json()

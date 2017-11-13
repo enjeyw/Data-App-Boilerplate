@@ -21,4 +21,9 @@ SQLALCHEMY_TRACK_MODIFICATIONS = False
 REDIS_URL = parser['REDIS']['URI']
 
 MERGE_OAUTH_PROFILES = True
+AUTH0_DOMAIN = parser['AUTH0']['domain']
+AUTH0_CLIENT_ID = parser['AUTH0']['client_id']
+AUTH0_CLIENT_SECRET = parser['AUTH0']['client_secret']
+
+
 TOKEN_EXPIRATION =  60 * 60 * 24 * 7 # 1 Week

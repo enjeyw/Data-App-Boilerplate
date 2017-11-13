@@ -2,8 +2,8 @@ import Auth0Lock from 'auth0-lock';
 
 // Auth0 Lock
 export const lock = new Auth0Lock(
-    'ElwQEnpMH_BV-atoVDeJaXc-ehN0yv4A',
-    'sempo.au.auth0.com',
+    window.AUTH0_CLIENT_ID,
+    window.AUTH0_DOMAIN,
     {
       auth: {
         redirect: false,
