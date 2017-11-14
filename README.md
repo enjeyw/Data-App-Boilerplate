@@ -39,9 +39,22 @@ https://aws.amazon.com/cli/
 - run build_ecs.sh
 
 ### Deploy app
+In terminal run:
+
+```
+eb create
+```
+(Choose a name you like and then defaults)
+```
+eb init
+````
+(Choose a location and accept defaults)
+
 ```
 eb deploy
 ```
+(accept defaults)
+
 
 ### Set up DB
 - Go to Amazon RDS and set up a postgres database in the same Availability zone as the app you just created.
