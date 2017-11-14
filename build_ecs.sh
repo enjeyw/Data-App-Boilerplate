@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-REPOSITORY_URI=290492953667.dkr.ecr.ap-southeast-2.amazonaws.com/databoilerplate
+REPOSITORY_URI=[PUT YOUR REPOSITORY URI HERE]
 
 npm run build
 

@@ -3,7 +3,7 @@
   "containerDefinitions": [
     {
       "name": "app",
-      "image": "290492953667.dkr.ecr.ap-southeast-2.amazonaws.com/databoilerplate:server",
+      "image": "[PUT YOUR REPOSITORY URI HERE]:server",
       "essential": true,
       "memory": 200,
       "cpu": 1,
@@ -23,7 +23,7 @@
     },
     {
       "name": "proxy",
-      "image": "290492953667.dkr.ecr.ap-southeast-2.amazonaws.com/databoilerplate:proxy",
+      "image": "[PUT YOUR REPOSITORY URI HERE]:proxy",
       "essential": true,
       "memory": 200,
       "cpu": 1,
@@ -51,7 +51,7 @@
     },
     {
       "name": "worker",
-      "image": "290492953667.dkr.ecr.ap-southeast-2.amazonaws.com/databoilerplate:server",
+      "image": "[PUT YOUR REPOSITORY URI HERE]:server",
       "essential": false,
       "memory": 128,
       "links": [
