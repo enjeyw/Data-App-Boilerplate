@@ -1,0 +1,36 @@
+version: '3'
+services:
+  app:
+    build: .
+    image: server
+    environment:
+      LOCATION: "LOCAL_DOCKER"
+      CONTAINER_TYPE: "APP"
+
+    depends_on:
+    - redis
+
+  worker:
+    build: .
+    image: server
+    environment:
+      LOCATION: "LOCAL_DOCKER"
+      CONTAINER_TYPE: "WORKER"
+
+    depends_on:
+    - redis
+    - app
+
+
+  proxy:
+    build: ./proxy
+    environment:
+      LOCATION: "LOCAL_DOCKER"
+    ports:
+     - "80:80"
+    depends_on:
+     - app
+
+  redis:
+    image: "redis:alpine"
+

@@ -4,8 +4,6 @@ RUN apk update \
   && apk add gcc g++ libffi libffi-dev libstdc++ python3-dev musl-dev \
   && apk add postgresql-dev
 
-RUN pip install numpy==1.13.1 pandas==0.20.3
-
 RUN apk add linux-headers
 
 COPY ./requirements.txt /
