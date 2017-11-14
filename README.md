@@ -35,7 +35,7 @@ https://aws.amazon.com/cli/
 - Navigate to the repository section of aws in your chosen location ( for example https://ap-southeast-2.console.aws.amazon.com/ecs/home?region=ap-southeast-2#/repositories)
  and create a new repository.
  
-- In build_ecs.sh set REPOSITORY_URI to match that of the repository you just created. Eg:
+- In dockerrun.aws.json and build_ecs.sh set REPOSITORY_URI to match that of the repository you just created. Eg:
 `290492953667.dkr.ecr.ap-southeast-2.amazonaws.com/databoilerplate`
 - run build_ecs.sh
 
