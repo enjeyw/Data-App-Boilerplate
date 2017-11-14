@@ -35,7 +35,7 @@ https://aws.amazon.com/cli/
 - Navigate to the repository section of aws in your chosen location ( for example https://ap-southeast-2.console.aws.amazon.com/ecs/home?region=ap-southeast-2#/repositories)
  and create a new repository.
  
-- In build_ecs.sh set REPOSITORY_URI to match that of the repository you just created. Eg:
+- In dockerrun.aws.json and build_ecs.sh set REPOSITORY_URI to match that of the repository you just created. Eg:
 `290492953667.dkr.ecr.ap-southeast-2.amazonaws.com/databoilerplate`
 - run build_ecs.sh
 
@@ -45,15 +45,13 @@ eb deploy
 ```
 
 ### Set up DB
-Go to Amazon RDS and set up a postgres database in the same Availability zone as the app you just created
+- Go to Amazon RDS and set up a postgres database in the same Availability zone as the app you just created.
+Follow this guide here to link the database to your newly deployed app:
+http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/AWSHowTo.RDS.html
 
-Modify
- [database]
-database = database_location
+- Modify [database] settings in config_files/prod_config.ini to match the settings of the database you just created
 
-in config_files/prod_config.ini to match the uri of the database you just created
-
-`eb deploy` one more time
+- run build_ecs.sh and `eb deploy` one more time
 
 all done!
 
