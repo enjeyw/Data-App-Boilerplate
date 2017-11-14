@@ -50,6 +50,7 @@ Follow this guide here to link the database to your newly deployed app:
 http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/AWSHowTo.RDS.html
 
 - Modify [database] settings in config_files/prod_config.ini to match the settings of the database you just created
+
 -run build_ecs.sh and `eb deploy` one more time
 
 all done!
