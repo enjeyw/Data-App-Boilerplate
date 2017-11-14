@@ -13,7 +13,7 @@ def get_auth0_profile(auth_0_identity_token):
     headers = {'content-type': 'application/json',
                'authorization': 'Bearer ' + auth_0_identity_token}
 
-    r = requests.get(app.config['AUTH0_DOMAIN'], headers = headers)
+    r = requests.get('https://' + app.config['AUTH0_DOMAIN'] + '/userinfo', headers = headers)
 
     try:
         profile = r.json()
