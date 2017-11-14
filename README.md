@@ -40,15 +40,15 @@ https://aws.amazon.com/cli/
 
 ### Deploy app
 In terminal run:
+```
+eb init
+````
+(Choose a location and accept defaults)
 
 ```
 eb create
 ```
 (Choose a name you like and then defaults)
-```
-eb init
-````
-(Choose a location and accept defaults)
 
 ```
 eb deploy
@@ -63,7 +63,14 @@ http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/AWSHowTo.RDS.html
 
 - Modify [database] settings in config_files/prod_config.ini to match the settings of the database you just created
 
-- run build_ecs.sh and `eb deploy` one more time
+
+### Optional: Set up Auth0
+- Go to www.auth0.com and create an account. Update the [Auth0] fields in config_files/prod_config.ini with your own settings. In the auth0 settings, be sure to add your domain to the allowed web origins and CORS origins. Also consider adding local host 
+
+
+### Update app with new settings
+- once again run build_ecs.sh and `eb deploy`
+
 
 all done!
 
