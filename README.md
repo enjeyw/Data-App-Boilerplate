@@ -20,9 +20,19 @@ Includes user authentication using Auth0.
 ### Install Docker locally
 https://www.docker.com/
 
-### Install the Amazon CLI
+### Install the Amazon CLI with ability to deploy docker images to ECR
 - Register an AWS account (https://aws.amazon.com/)
 - Download and set up the amazon cli (https://aws.amazon.com/cli/)
+
+- In the IAM section of AWS, create a user with name 'ECS' with permissions to deploy to ECR
+(Click on this link and then click 'CREATE USER')
+  https://console.aws.amazon.com/iam/home#/users$new?step=review&accessKey&userNames=ECS4&permissionType=policies&policies=arn:aws:iam::aws:policy%2FAmazonEC2ContainerRegistryFullAccess
+  
+- Add the credentials of the ECS user to your local AWS configuration
+```
+aws configure --profile ECS
+```
+
 
 
 ### Install Front-End Requirements
