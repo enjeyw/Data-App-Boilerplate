@@ -50,7 +50,7 @@ REPOSITORY_URI=290492953667.dkr.ecr.ap-southeast-2.amazonaws.com/boilerplate
 ```
 is good
 ```
-  REPOSITORY_URI = 290492953667.dkr.ecr.ap-southeast-2.amazonaws.com/boilerplate
+REPOSITORY_URI = 290492953667.dkr.ecr.ap-southeast-2.amazonaws.com/boilerplate
 ```
 is Bad
 
