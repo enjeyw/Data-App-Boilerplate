@@ -43,8 +43,7 @@ pip3 install -r requirements.txt
 - Create a repository in the Amazon EC2 Container Registry in your chosen geographic location ( for example https://ap-southeast-2.console.aws.amazon.com/ecs/home?region=ap-southeast-2#/repositories for Amazon's AP-Southeast-2 region)
  and create a new repository.
  
-- In dockerrun.aws.json and build_ecs.sh set REPOSITORY_URI (eg `290492953667.dkr.ecr.ap-southeast-2.amazonaws.com/databoilerplate`) to match that of the repository wherever you see '[PUT YOUR REPOSITORY URI HERE]' (4 places)
-- run build_ecs.sh
+- In in your project files 'dockerrun.aws.json' and 'build_ecs.sh', wherever you see '[PUT YOUR REPOSITORY URI HERE]' (there are 4 places in total), paste in the URI for the repository you just created ( looks like `290492953667.dkr.ecr.ap-southeast-2.amazonaws.com/databoilerplate`).
 
 ### Deploy app
 In terminal run:
