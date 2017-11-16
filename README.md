@@ -20,16 +20,23 @@ Includes user authentication using Auth0.
 ### Install Docker locally
 https://www.docker.com/
 
-### Install Front-End Requirements
-```
-npm install
-```
-
-### Upload Docker Images to amazon ECR 
+### Install the Amazon CLI
 - Download and set up the amazon cli:
 
 https://aws.amazon.com/cli/
 
+
+### Install Front-End Requirements
+From project direcotry:
+```
+npm install
+```
+
+## Install Python Requirements:
+pip3 install -r requirements.txt
+(consider using a virtual environment https://docs.python.org/3/tutorial/venv.html)
+
+### Upload Docker Images to amazon ECR 
 (make sure you have an account set with permission to call ecr:GetAuthorizationToken )
 
 - Navigate to the repository section of aws in your chosen location ( for example https://ap-southeast-2.console.aws.amazon.com/ecs/home?region=ap-southeast-2#/repositories)
