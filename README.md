@@ -32,7 +32,9 @@ npm install
 ```
 
 ### Install Python Requirements:
+```
 pip3 install -r requirements.txt
+```
 (consider using a virtual environment https://docs.python.org/3/tutorial/venv.html)
 
 ### Upload Docker Images to amazon ECR 
