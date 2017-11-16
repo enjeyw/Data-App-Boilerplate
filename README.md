@@ -44,6 +44,15 @@ pip3 install -r requirements.txt
  and create a new repository.
  
 - In in your project files 'dockerrun.aws.json' and 'build_ecs.sh', wherever you see '[PUT YOUR REPOSITORY URI HERE]' (there are 4 places in total), paste in the URI for the repository you just created ( looks like `290492953667.dkr.ecr.ap-southeast-2.amazonaws.com/databoilerplate`).
+WARNING, you cannot have a space in the variable definition in build_ecs.sh.
+EG: REPOSITORY_URI=290492953667.dkr.ecr.ap-southeast-2.amazonaws.com/boilerplate is GOOD
+  REPOSITORY_URI = 290492953667.dkr.ecr.ap-southeast-2.amazonaws.com/boilerplate is BAD
+
+
+- run build_ecs.sh
+```
+bash build_ecs.sh
+```
 
 ### Deploy app
 In terminal run:
