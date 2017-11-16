@@ -37,6 +37,11 @@ pip3 install -r requirements.txt
 ```
 (consider using a virtual environment https://docs.python.org/3/tutorial/venv.html)
 
+### Set up the database:
+With your virtual environment active run:
+```
+python manage.py db 
+
 ### Upload Docker Images to amazon ECR 
 (make sure you have an account set with permission to call ecr:GetAuthorizationToken )
 
