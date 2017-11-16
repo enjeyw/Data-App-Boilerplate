@@ -40,7 +40,7 @@ pip3 install -r requirements.txt
 ### Upload Docker Images to amazon ECR 
 (make sure you have an account set with permission to call ecr:GetAuthorizationToken )
 
-- Navigate to the repository section of aws in your chosen location ( for example https://ap-southeast-2.console.aws.amazon.com/ecs/home?region=ap-southeast-2#/repositories)
+- Create a repository in the Amazon EC2 Container Registry in your chosen geographic location ( for example https://ap-southeast-2.console.aws.amazon.com/ecs/home?region=ap-southeast-2#/repositories for Amazon's AP-Southeast-2 region)
  and create a new repository.
  
 - In dockerrun.aws.json and build_ecs.sh set REPOSITORY_URI (eg `290492953667.dkr.ecr.ap-southeast-2.amazonaws.com/databoilerplate`) to match that of the repository wherever you see '[PUT YOUR REPOSITORY URI HERE]' (4 places)
