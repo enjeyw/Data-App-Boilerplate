@@ -81,7 +81,7 @@ eb deploy
 ### Set up DB
 - Go to Amazon RDS and set up a postgres database in the same Availability zone as the app you just created.
 Follow this guide here to link the database to your newly deployed app:
-http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/AWSHowTo.RDS.html
+http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/AWSHowTo.RDS.html#rds-external-defaultvpc
 
 - Modify [database] settings in config_files/prod_config.ini to match the settings of the database you just created
 
