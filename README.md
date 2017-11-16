@@ -75,7 +75,7 @@ In terminal run:
 ```
 eb init
 ````
-(Choose a location and accept defaults)
+(Choose a location, don't set up source control or SHH, and accept defaults for everything else)
 
 ```
 eb create
