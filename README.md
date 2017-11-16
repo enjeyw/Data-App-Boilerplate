@@ -31,7 +31,7 @@ From project direcotry:
 npm install
 ```
 
-### Install Python Requirements:
+### Install Python Requirements for local editing:
 ```
 pip3 install -r requirements.txt
 ```
