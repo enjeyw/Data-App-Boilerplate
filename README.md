@@ -21,9 +21,8 @@ Includes user authentication using Auth0.
 https://www.docker.com/
 
 ### Install the Amazon CLI
-- Download and set up the amazon cli:
-
-https://aws.amazon.com/cli/
+- Register an AWS account (https://aws.amazon.com/)
+- Download and set up the amazon cli (https://aws.amazon.com/cli/)
 
 
 ### Install Front-End Requirements
@@ -32,7 +31,7 @@ From project direcotry:
 npm install
 ```
 
-## Install Python Requirements:
+### Install Python Requirements:
 pip3 install -r requirements.txt
 (consider using a virtual environment https://docs.python.org/3/tutorial/venv.html)
 
