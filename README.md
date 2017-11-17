@@ -64,6 +64,7 @@ REPOSITORY_URI = 290492953667.dkr.ecr.ap-southeast-2.amazonaws.com/boilerplate
 ```
 is Bad
 
+- In 'build_ecs.sh' modify [PUT YOUR REGION HERE] to the region you are deploying in (eg ap-southeast-2)
 
 - run build_ecs.sh
 ```
