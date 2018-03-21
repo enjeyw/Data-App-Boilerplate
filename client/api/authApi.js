@@ -1,20 +1,5 @@
 import Auth0Lock from 'auth0-lock';
 
-// Auth0 Lock
-export const lock = new Auth0Lock(
-    window.AUTH0_CLIENT_ID,
-    window.AUTH0_DOMAIN,
-    {
-      auth: {
-        redirect: false,
-        params: {scope: 'openid email user_metadata app_metadata picture'}
-      },
-      allowedConnections: ["facebook", 'google-oauth2'],
-      languageDictionary: { title: 'React Python Boilerplate' }
-    }
-  );
-
-
 export const storeToken = (token) => {
   localStorage.setItem('sessionToken', token);
 };
