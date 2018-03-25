@@ -4,13 +4,18 @@ export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 export const LOGIN_FAILURE = 'LOGIN_FAILURE';
 export const LOGOUT = 'LOGOUT';
 
-export const initialState = {
+export const REGISTER_REQUEST = 'REGISTER_REQUEST';
+export const REGISTER_SUCCESS = 'REGISTER_SUCCESS';
+export const REGISTER_FAILURE = 'REGISTER_FAILURE';
+export const REGISTER_INACTIVE = 'REGISTER_INACTIVE';
+
+const initialLoginState = {
   isLoggingIn: false,
   token: null,
   error: null
 };
 
-export const auth = (state = initialState, action) => {
+export const login = (state = initialLoginState, action) => {
   switch (action.type) {
     case LOGIN_REQUEST:
       return {...state, isLoggingIn: true};
@@ -19,15 +24,41 @@ export const auth = (state = initialState, action) => {
     case LOGIN_FAILURE:
       return {...state, isLoggingIn: false, token: null, error: action.error || 'unknown error'};
     case LOGOUT:
-      return initialState;
+      return initialLoginState;
     default:
       return state;
   }
-}
+};
 
-export const loginRequest = () => (
+const initialRegisterState = {
+  isRegistering: false,
+  registerSuccess: false,
+  error: null
+};
+
+export const register = (state = initialRegisterState, action) => {
+  switch (action.type) {
+    case REGISTER_REQUEST:
+      return {...state, isRegistering: true};
+    case REGISTER_SUCCESS:
+      return {...state, isRegistering: false, registerSuccess: true};
+    case REGISTER_FAILURE:
+      return {...state, isLoggingIn: false, registerSuccess: false, error: action.error || 'unknown error'};
+    case REGISTER_INACTIVE:
+      return initialRegisterState;
+    default:
+      return state;
+  }
+};
+
+
+// ACTIONS
+
+export const loginRequest = ( {username, password}) => (
   {
-    type: LOGIN_REQUEST
+    type: LOGIN_REQUEST,
+    username,
+    password
   }
 );
 
@@ -48,5 +79,33 @@ export const loginFailure = error => (
 export const logout = () => (
   {
     type: LOGOUT
+  }
+);
+
+
+export const registerRequest = ( {username, password}) => (
+  {
+    type: REGISTER_REQUEST,
+    username,
+    password
+  }
+);
+
+export const registerSuccess = () => (
+  {
+    type: LOGIN_SUCCESS
+  }
+);
+
+export const registerFailure = error => (
+  {
+    type: REGISTER_FAILURE,
+    error
+  }
+);
+
+export const deactivateRegister = () => (
+  {
+    type: REGISTER_INACTIVE
   }
 );

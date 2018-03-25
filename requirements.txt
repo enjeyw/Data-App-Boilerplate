@@ -26,3 +26,17 @@ SQLAlchemy==1.1.15
 urllib3==1.22
 uWSGI==2.0.15
 Werkzeug==0.12.2
+
+
+
+{
+        "auths": {
+                "290492953667.dkr.ecr.ap-southeast-2.amazonaws.com": {},
+                "290492953667.dkr.ecr.us-west-2.amazonaws.com": {},
+                "https://290492953667.dkr.ecr.ap-southeast-2.amazonaws.com": {},
+                "https://290492953667.dkr.ecr.us-west-2.amazonaws.com": {}
+        },
+        "credsStore": "osxkeychain"
+}
+
+

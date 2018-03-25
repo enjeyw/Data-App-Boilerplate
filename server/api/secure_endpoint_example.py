@@ -1,14 +1,24 @@
-from flask import Blueprint
-from flask_restful import Api, Resource, abort, reqparse
+from flask import Blueprint, request, make_response, jsonify
+from flask.views import MethodView
 
 from server import db, app
-from server.utils.auth import AuthenticatedResource
+from server.utils.auth import requires_auth
 
-secure_endpoint_api = Api(Blueprint('secure_endpoint_api', __name__))
+secure_endpoint_example_blueprint = Blueprint('secure_endpoint', __name__)
 
-@secure_endpoint_api.resource('/secure_endpoint/')
-class Refresh_API_Token(AuthenticatedResource):
 
+class SecureEndpointExampleAPI(MethodView):
+
+    @requires_auth
     def get(self):
-        return {'foo': 'bar'}
+        return jsonify({'foo': 'bar'})
 
+# define the API resources
+secure_endpoint_view = SecureEndpointExampleAPI.as_view('secure_endpoint_example_api')
+
+# add Rules for API Endpoints
+secure_endpoint_example_blueprint.add_url_rule(
+    '/secure_endpoint/',
+    view_func=secure_endpoint_view,
+    methods=['GET']
+)

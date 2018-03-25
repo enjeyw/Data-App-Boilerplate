@@ -5,37 +5,26 @@ import styled from 'styled-components';
 import { loginRequest, logout } from '../reducers/authReducer'
 
 import AuthenticatedResource from './authenticatedResourceButton.jsx'
+import LoginForm from './auth/loginForm.jsx'
+import AuthModule from './auth/authModule.jsx'
+
+
 
 const mapStateToProps = (state) => {
   return {
-    loggedIn: (state.auth.token !== null),
+    loggedIn: (state.login.token != null),
     resourceData: state.authenticatedResourceData
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    loginRequest: () => dispatch(loginRequest()),
     logout:       () => dispatch(logout())
   };
 };
 
 
-const HomePage = ({loginRequest, logout, loggedIn, resourceData}) => {
-
-  if (loggedIn) {
-    var button = (
-      <Button onClick={logout} >
-        Logout
-      </Button>
-    )
-  } else {
-    var button = (
-      <Button onClick={loginRequest} >
-        Login
-      </Button>
-    )
-  }
+const HomePage = ({logout, loggedIn, resourceData}) => {
 
   if (resourceData.isRequesting) {
     var dataMessage = 'Loading'
@@ -50,7 +39,7 @@ const HomePage = ({loginRequest, logout, loggedIn, resourceData}) => {
   return (
     <WrapperDiv>
 
-        { button }
+        <AuthModule/>
         <Message>
           {loggedIn? 'Logged in!':'Not logged in'}
         </Message>

@@ -1,6 +1,6 @@
-import { call, fork, put, take, all, cancelled, cancel } from 'redux-saga/effects';
+import { call, fork, put, take, all, cancelled, cancel, takeEvery } from 'redux-saga/effects';
 
-import { lock, requestApiToken, refreshApiToken, storeToken, getToken, removeToken } from '../api/authApi'
+import { lock, requestApiToken, refreshApiToken, registerAPI, storeToken, getToken, removeToken } from '../api/authApi'
 
 import {
   LOGIN_REQUEST,
@@ -9,14 +9,19 @@ import {
   LOGOUT,
   loginFailure,
   loginSuccess,
+  REGISTER_REQUEST,
+  REGISTER_SUCCESS,
+  REGISTER_FAILURE,
+  registerSuccess,
+  registerFailure
 } from '../reducers/authReducer';
 
 export function* loginFlow() {
   var reauth = yield call(refreshToken);
   while (true) {
-    if (!(reauth.token)) {
-      yield take(LOGIN_REQUEST);
-      var task = yield fork(authorise);
+    if (!(reauth.auth_token)) {
+      const payload = yield take(LOGIN_REQUEST);
+      var task = yield fork(authorise, payload);
     }
     const action = yield take([LOGOUT, LOGIN_FAILURE]);
     if (action.type === LOGOUT && !(typeof task === 'undefined')) {
@@ -26,12 +31,38 @@ export function* loginFlow() {
   }
 }
 
+function* authorise( {username, password} ) {
+  try {
+    yield call(requestToken, username, password);
+  } catch (error) {
+    yield put(loginFailure(error));
+  }
+}
+
+function* requestToken(username, password) {
+  try {
+    const token_request = yield call(requestApiToken, username, password);
+    yield put(
+      {type: LOGIN_SUCCESS,
+        token: token_request.auth_token
+      });
+    yield call(storeToken, token_request.auth_token );
+    return token_request
+  } catch(error) {
+    yield put({type: LOGIN_FAILURE, error: error.statusText})
+  } finally {
+    if (yield cancelled()) {
+      // ... put special cancellation handling code here
+    }
+  }
+}
+
 function* refreshToken() {
   try {
     const token_request = yield call(refreshApiToken);
-    if (token_request.token) {
-      yield put({type: LOGIN_SUCCESS, token: token_request.token});
-      yield call(storeToken, token_request.token );
+    if (token_request.auth_token) {
+      yield put({type: LOGIN_SUCCESS,token: token_request.auth_token});
+      yield call(storeToken, token_request.auth_token );
     }
     return token_request
   } catch(error) {
@@ -45,51 +76,27 @@ function* refreshToken() {
   }
 }
 
-function* requestToken(auth0_accessToken) {
+
+
+// Create Account Saga
+function* register({ username, password }) {
   try {
-    const token_request = yield call(requestApiToken, auth0_accessToken);
-    yield put({type: LOGIN_SUCCESS, token: token_request.token});
-    yield call(storeToken, token_request.token );
-    return token_request
-  } catch(error) {
-    yield put({type: LOGIN_FAILURE, error: error.statusText})
-  } finally {
-    if (yield cancelled()) {
-      // ... put special cancellation handling code here
-    }
-  }
-}
-
-
-export function* authorise() {
-
-  const showLock = () =>
-    new Promise((resolve, reject) => {
-      lock.on('hide', () => reject('Lock closed'));
-
-      lock.on('authenticated', (authResult) => {
-        lock.hide();
-        resolve({idToken: authResult.accessToken });
-      });
-
-      lock.on('unrecoverable_error', (error) => {
-        lock.hide();
-        reject(error);
-      });
-
-      lock.show();
-    });
-
-  try {
-    const { idToken } = yield call(showLock);
-    yield call(requestToken, idToken);
+    const registered_account = yield call(registerAPI, username, password);
+    yield put({type: REGISTER_SUCCESS, registered_account});
+    yield put({type: LOGIN_REQUEST, username: username, password: password});
   } catch (error) {
-    yield put(loginFailure(error));
+    yield put({type: REGISTER_FAILURE, error: error.statusText})
   }
 }
+
+function* watchRegisteRequest() {
+  yield takeEvery(REGISTER_REQUEST, register);
+}
+
 
 export default function* authSagas() {
   yield all([
-    loginFlow()
+    loginFlow(),
+    watchRegisteRequest()
   ])
 }

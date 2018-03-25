@@ -1,58 +1,35 @@
 from functools import wraps
-from flask import request, g
-import requests
-from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
-from itsdangerous import SignatureExpired, BadSignature
+from flask import request, g, make_response, jsonify
 from server import app, models
 
 from flask_restful import Resource, abort
 
-
-def get_auth0_profile(auth_0_identity_token):
-
-    headers = {'content-type': 'application/json',
-               'authorization': 'Bearer ' + auth_0_identity_token}
-
-    r = requests.get('https://' + app.config['AUTH0_DOMAIN'] + '/userinfo', headers = headers)
-
-    try:
-        profile = r.json()
-    except:
-        raise
-
-    return profile
-
-def generate_token(user, expiration=app.config['TOKEN_EXPIRATION']):
-    s = Serializer(app.config['SECRET_KEY'], expires_in=expiration)
-    token = s.dumps({
-        'id': user.id
-    }).decode('utf-8')
-    return token
-
-def verify_token(token):
-    s = Serializer(app.config['SECRET_KEY'])
-    try:
-        data = s.loads(token)
-    except (BadSignature, SignatureExpired):
-        return None
-    user = models.User.query.get(data['id'])
-    return user
-
 def requires_auth(f):
     @wraps(f)
     def decorated(*args, **kwargs):
-        token = request.headers.get('Authorization', None)
-        if token:
-            string_token = token.encode('ascii', 'ignore')
-            user = verify_token(string_token)
-            if user:
-                g.current_user = user
+
+        auth_header = request.headers.get('Authorization')
+        if auth_header and auth_header != 'null':
+            auth_token = auth_header.split(" ")[0]
+        else:
+            auth_token = ''
+        if auth_token:
+            resp = models.User.decode_auth_token(auth_token)
+            if not isinstance(resp, str):
+                user = models.User.query.filter_by(id=resp).first()
+                g.user = user
                 return f(*args, **kwargs)
 
-        return abort(401, message="Authentication is required to access this resource")
+            responseObject = {
+                'status': 'fail',
+                'message': resp
+            }
+            return make_response(jsonify(responseObject)), 401
+        else:
+            responseObject = {
+                'status': 'fail',
+                'message': 'Provide a valid auth token.'
+            }
+            return make_response(jsonify(responseObject)), 401
 
     return decorated
-
-
-class AuthenticatedResource(Resource):
-    method_decorators = [requires_auth]
